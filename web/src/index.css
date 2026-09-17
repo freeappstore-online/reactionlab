@@ -1,0 +1,98 @@
+/* ================================================================== index.css
+   Single stylesheet entry point, per the FreeAppStore handbook:
+   Tailwind imports, platform variables, and the app accent colour.
+
+   Tailwind is wired as theme + utilities only. Preflight is deliberately left
+   out — the app's own base layer below already normalises what it needs, and
+   preflight's list/heading resets would fight it. Unused utilities and theme
+   variables are pruned at build time, so an unused Tailwind costs nothing.
+   ------------------------------------------------------------------------ */
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@import "./styles/base.css" layer(base);
+@import "./styles/layout.css" layer(components);
+@import "./styles/components.css" layer(components);
+@import "./styles/stage.css" layer(components);
+
+/* ------------------------------------------------------- platform variables
+   One accent token drives every active state, primary button and highlight.
+   Light is the base; dark is a straight token swap via prefers-color-scheme
+   (no manual toggle by design).
+   ------------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light dark;
+
+  /* surfaces & text */
+  --paper: #f7f6f3;
+  --panel: #ffffff;
+  --ink: #16181d;
+  --muted: #5f6672;
+  --line: #e4e1da;
+  --glass: rgba(255, 255, 255, 0.76);
+
+  /* status */
+  --success: #0f7a50;
+  --warning: #a96400;
+  --error: #c0332b;
+
+  /* --------------------------------------------------- app accent colour */
+  --accent: #2b5cff;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(43, 92, 255, 0.1);
+
+  /* test stage — deliberately flat, high-contrast, no gradients */
+  --stage-idle: #21242b;
+  --stage-idle-ink: #ffffff;
+  --stage-go: #2b5cff;
+  --stage-go-ink: #ffffff;
+  --stage-hold: #b8291f;
+  --stage-hold-ink: #ffffff;
+
+  /* geometry */
+  --sidebar-w: 17rem;
+  --r-card: 1.25rem;
+  --r-btn: 0.75rem;
+  --r-pill: 999px;
+  --pad-card: 1.5rem;
+  --gap: 1.25rem;
+  --dock-h: 4.25rem;
+
+  /* type */
+  --font-body: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: Fraunces, ui-serif, Georgia, "Times New Roman", serif;
+
+  --shadow-card: 0 1px 2px rgba(16, 17, 20, 0.04), 0 8px 24px -16px rgba(16, 17, 20, 0.24);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101114;
+    --panel: #17191e;
+    --ink: #eceef2;
+    --muted: #98a0ae;
+    --line: #262a32;
+    --glass: rgba(23, 25, 30, 0.78);
+
+    --success: #35c48c;
+    --warning: #e2a642;
+    --error: #ff6f63;
+
+    --accent: #5680ff;
+    --accent-ink: #06122e;
+    --accent-soft: rgba(86, 128, 255, 0.14);
+
+    --stage-idle: #191c22;
+    --stage-idle-ink: #e7eaf0;
+    --stage-go: #5680ff;
+    --stage-go-ink: #06122e;
+    --stage-hold: #d1392c;
+    --stage-hold-ink: #ffffff;
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -20px rgba(0, 0, 0, 0.8);
+  }
+}

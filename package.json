@@ -1,0 +1,19 @@
+{
+  "name": "reactionlab-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0",
+    "pnpm": ">=10.30.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter reactionlab dev",
+    "build": "pnpm --filter reactionlab build",
+    "preview": "pnpm --filter reactionlab preview",
+    "typecheck": "pnpm --filter reactionlab typecheck",
+    "check": "pnpm install --frozen-lockfile && pnpm typecheck && pnpm build",
+    "icons": "node scripts/generate-icons.mjs"
+  }
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>ReactionLab — measure your reflexes</title>
+    <meta
+      name="description"
+      content="Four reaction-time and focus tests with millisecond-accurate timing. Everything stays on your device."
+    />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#f7f6f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ReactionLab" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <!-- The only external request this app ever makes. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+    />
+
+    <style>
+      /* Inlined so the page paints its final background on the very first frame:
+         anything later would show as a flash / layout shift. */
+      :root {
+        color-scheme: light dark;
+        --boot-paper: #f7f6f3;
+        --boot-ink: #16181d;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --boot-paper: #101114;
+          --boot-ink: #eceef2;
+        }
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--boot-paper);
+        color: var(--boot-ink);
+        font-family: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      #root {
+        min-height: 100dvh;
+      }
+      .boot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100dvh;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.45;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"><div class="boot">ReactionLab</div></div>
+    <noscript>
+      <p style="padding: 2rem; text-align: center">
+        ReactionLab measures input timing in the browser and needs JavaScript enabled.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

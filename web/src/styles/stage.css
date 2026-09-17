@@ -1,0 +1,258 @@
+/* ------------------------------------------------------------------ stage
+   The timing-critical surface. Nothing here animates or transitions: any
+   easing on a colour or opacity change would smear the moment of stimulus
+   onset and inflate every measurement.
+   ------------------------------------------------------------------------ */
+
+.runner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  max-width: 68rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.runner__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.runner__bar h1 {
+  font-size: 1.25rem;
+}
+
+.runner__progress {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: min(60dvh, 30rem);
+  padding: 1.5rem;
+  border: 0;
+  border-radius: var(--r-card);
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior: contain;
+  transition: none !important;
+  animation: none !important;
+
+  background: var(--stage-idle);
+  color: var(--stage-idle-ink);
+}
+
+.stage:disabled {
+  cursor: default;
+}
+
+.stage[data-phase="go"] {
+  background: var(--stage-go);
+  color: var(--stage-go-ink);
+}
+
+.stage[data-phase="hold"] {
+  background: var(--stage-hold);
+  color: var(--stage-hold-ink);
+}
+
+.stage__headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.1rem + 3.2vw, 3rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.stage__sub {
+  font-size: 0.9375rem;
+  opacity: 0.78;
+  max-width: 28rem;
+}
+
+.stage__readout {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 2rem + 7vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Every phase's copy is present in the DOM from the start and revealed by
+   CSS alone, so a stimulus never waits on a React render to become visible. */
+.stage__phase {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stage[data-phase="idle"] .stage__phase[data-for="idle"],
+.stage[data-phase="wait"] .stage__phase[data-for="wait"],
+.stage[data-phase="go"] .stage__phase[data-for="go"],
+.stage[data-phase="hold"] .stage__phase[data-for="hold"],
+.stage[data-phase="feedback"] .stage__phase[data-for="feedback"],
+.stage[data-phase="paused"] .stage__phase[data-for="paused"] {
+  display: flex;
+}
+
+/* ------------------------------------------------------------ choice grid */
+
+.choice {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+  width: min(100%, 40rem);
+  margin-top: 0.5rem;
+}
+
+.choice__target {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  aspect-ratio: 3 / 4;
+  border: 2px solid currentColor;
+  border-radius: var(--r-btn);
+  background: transparent;
+  color: inherit;
+  opacity: 0.32;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.7rem + 2vw, 1.75rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: none !important;
+}
+
+.choice__target[data-active="true"] {
+  opacity: 1;
+  background: currentColor;
+}
+
+.choice__target[data-active="true"] .choice__key {
+  color: var(--stage-idle);
+}
+
+.choice__key {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 420px) {
+  .choice__target {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* -------------------------------------------------------------- aim stage */
+
+.aim {
+  position: relative;
+  width: 100%;
+  min-height: min(60dvh, 30rem);
+  border-radius: var(--r-card);
+  background: var(--stage-idle);
+  color: var(--stage-idle-ink);
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.aim__target {
+  position: absolute;
+  width: var(--aim-size, 4rem);
+  height: var(--aim-size, 4rem);
+  margin: calc(var(--aim-size, 4rem) / -2) 0 0 calc(var(--aim-size, 4rem) / -2);
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--stage-go);
+  cursor: crosshair;
+  transition: none !important;
+}
+
+.aim__target::after {
+  content: "";
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  background: var(--stage-idle);
+}
+
+.aim__intro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.aim__hud {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------- keyhints */
+
+.keyhint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.5rem;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 0.35rem;
+  background: var(--panel);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}

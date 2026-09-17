@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "reactionlab-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "reactionlab", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "reactionlab-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "reactionlab", "preview", "--port", "4173"],
+      "port": 4173
+    }
+  ]
+}
