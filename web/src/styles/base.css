@@ -6,6 +6,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* A downward swipe on a test stage must never become pull-to-refresh. */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -48,6 +50,11 @@ p {
 button {
   font: inherit;
   color: inherit;
+  touch-action: manipulation;
+}
+
+a {
+  touch-action: manipulation;
 }
 
 a {

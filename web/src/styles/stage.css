@@ -50,6 +50,7 @@
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none; /* no iOS long-press callout mid-trial */
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   overscroll-behavior: contain;
@@ -140,6 +141,8 @@
   font-size: clamp(1.1rem, 0.7rem + 2vw, 1.75rem);
   font-weight: 600;
   cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
   transition: none !important;
 }
 
@@ -178,6 +181,7 @@
   cursor: crosshair;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -192,6 +196,8 @@
   padding: 0;
   background: var(--stage-go);
   cursor: crosshair;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
   transition: none !important;
 }
 
@@ -240,6 +246,36 @@
   gap: 0.35rem;
   font-size: 0.8125rem;
   color: var(--muted);
+}
+
+/* Keyboard advice is noise on a phone. */
+@media (hover: none) and (pointer: coarse) {
+  .keyhint {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------- short screens
+   A phone held sideways. Fit the whole stage between the app bar and the
+   dock so a run never needs a scroll to see the stimulus. 14.5rem is the
+   app bar + runner bar + dock + gaps. Kept last so it wins on source order. */
+@media (max-height: 520px) {
+  .stage,
+  .aim {
+    min-height: max(10rem, calc(100dvh - 14.5rem));
+    padding: 1rem;
+  }
+
+  /* Tall 3:4 tiles would push the stage past the dock; use squat ones. */
+  .choice {
+    width: min(100%, 26rem);
+    margin-top: 0.25rem;
+  }
+
+  .choice__target {
+    aspect-ratio: auto;
+    min-height: 3rem;
+  }
 }
 
 kbd {

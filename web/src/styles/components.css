@@ -64,8 +64,10 @@
     border-color 120ms ease;
 }
 
-.btn:hover:not(:disabled) {
-  border-color: color-mix(in oklab, var(--ink) 22%, var(--line));
+@media (hover: hover) {
+  .btn:hover:not(:disabled) {
+    border-color: color-mix(in oklab, var(--ink) 22%, var(--line));
+  }
 }
 
 .btn:disabled {
@@ -124,9 +126,13 @@
     transform 140ms ease;
 }
 
-.testcard:hover {
-  border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
-  transform: translateY(-2px);
+/* Hover-only: on touch screens a hover state sticks after the tap, and the
+   lifted card would sit there looking pressed. */
+@media (hover: hover) {
+  .testcard:hover {
+    border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
+    transform: translateY(-2px);
+  }
 }
 
 .testcard__top {
@@ -327,6 +333,23 @@
   white-space: nowrap;
 }
 
+/* On phones the row breaks in two: title + meta on top, figures beneath,
+   instead of squeezing the text column into a four-line sliver. */
+@media (max-width: 480px) {
+  .list__item {
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+
+  .list__main {
+    flex-basis: 100%;
+  }
+
+  .list__value {
+    margin-left: auto;
+  }
+}
+
 /* --------------------------------------------------------------- controls */
 
 .field {
@@ -474,4 +497,19 @@ input[type="range"] {
 .trial[data-best="true"] {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+/* ------------------------------------------------------------ touch input
+   Coarse pointers get 44px targets, and copy that only makes sense with a
+   keyboard is dropped rather than left to confuse. */
+@media (hover: none) and (pointer: coarse) {
+  .btn--sm,
+  .segmented__btn {
+    min-height: 2.75rem;
+  }
+
+  .switch input {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
