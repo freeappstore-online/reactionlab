@@ -84,6 +84,13 @@ export function AboutView(): React.ReactElement {
           MIT. Copy it, fork it, ship it — the full text is in the LICENSE file at the root of the
           repository.
         </p>
+        <p className="card__note">
+          Built for{' '}
+          <a href="https://freeappstore.online" rel="noopener noreferrer">
+            freeappstore.online
+          </a>{' '}
+          — find more free, local-first apps there.
+        </p>
       </section>
     </div>
   );

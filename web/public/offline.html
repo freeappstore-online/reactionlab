@@ -5,18 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ReactionLab — offline</title>
     <style>
+      /* Standalone fallback with no stylesheet, so the brand values are
+         written inline via light-dark() rather than redefining the
+         platform's tokens. */
       :root {
         color-scheme: light dark;
-        --paper: #f7f6f3;
-        --ink: #16181d;
-        --muted: #5f6672;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --paper: #101114;
-          --ink: #eceef2;
-          --muted: #99a1af;
-        }
       }
       body {
         margin: 0;
@@ -24,18 +17,19 @@
         display: grid;
         place-items: center;
         padding: 2rem;
-        background: var(--paper);
-        color: var(--ink);
+        background: light-dark(#f7f6f3, #101114);
+        color: light-dark(#16181d, #eceef2);
         font-family: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
         text-align: center;
       }
       h1 {
+        font-family: Fraunces, ui-serif, Georgia, serif;
         font-size: 1.35rem;
         margin: 0 0 0.5rem;
       }
       p {
         margin: 0;
-        color: var(--muted);
+        color: light-dark(#5f6672, #98a0ae);
         max-width: 28rem;
         line-height: 1.6;
       }

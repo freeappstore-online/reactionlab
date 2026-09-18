@@ -14,7 +14,7 @@
 }
 
 .card__title {
-  font-family: var(--font-display);
+  font-family: Fraunces, ui-serif, Georgia, serif;
   font-size: 1.0625rem;
   font-weight: 600;
 }
@@ -186,14 +186,14 @@
 }
 
 .stat__value {
-  font-family: var(--font-display);
+  font-family: Fraunces, ui-serif, Georgia, serif;
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.1;
 }
 
 .stat__unit {
-  font-family: var(--font-body);
+  font-family: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--muted);
@@ -249,7 +249,7 @@
 }
 
 .empty__title {
-  font-family: var(--font-display);
+  font-family: Fraunces, ui-serif, Georgia, serif;
   font-size: 1.125rem;
   font-weight: 600;
 }
@@ -321,7 +321,7 @@
 }
 
 .list__value {
-  font-family: var(--font-display);
+  font-family: Fraunces, ui-serif, Georgia, serif;
   font-size: 1.125rem;
   font-weight: 600;
   white-space: nowrap;
@@ -442,7 +442,7 @@ input[type="range"] {
 .spark__label {
   fill: var(--muted);
   font-size: 9px;
-  font-family: var(--font-body);
+  font-family: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-variant-numeric: tabular-nums;
 }
 

@@ -86,6 +86,10 @@ export function Shell({ route, children }: ShellProps): React.ReactElement {
 
         <p className="sidebar__foot">
           Everything you record stays in this browser. No accounts, no network, no tracking.
+          <br />
+          <a href="https://freeappstore.online" rel="noopener noreferrer">
+            Built for freeappstore.online
+          </a>
         </p>
       </aside>
 
